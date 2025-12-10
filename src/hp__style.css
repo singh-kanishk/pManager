@@ -1,0 +1,164 @@
+:root {
+  --border-color: #000;
+  --background-color: #fff;
+  --sidebar-width: 200px; /* Adjust as needed */
+  --control-size: 1.25rem;
+}
+
+/* Basic Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.75rem 0px;
+  min-height: calc(100vh - 1.25rem);
+  background-color: #f0f0f0; /* Light background for the overall page */
+  font-family: sans-serif;
+}
+
+/* Main Window Container */
+.vault-window {
+  width: 800px; /* Example width */
+  height: 100vh; /* Example height */
+  border: 2px solid var(--border-color);
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Window Header (Title and Controls) */
+.window-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0.75rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.window-title {
+  font-weight: bold;
+}
+
+.window-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.icon-placeholder {
+  width: var(--control-size);
+  height: var(--control-size);
+  cursor: pointer;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Specific styling for window controls to match the sketch */
+  /* Resizing/Maximize icon is often square or rectangle */
+  /* The first two controls appear square/rectangle in the sketch */
+}
+
+/* Override for the first two control placeholders to make them box-like */
+.window-controls .new-button {
+  width: 25px;
+  height: 18px;
+  /* Placeholder for the resize/maximize box with a cross */
+  position: relative;
+}
+.window-controls .new-button::before {
+  content: "+";
+  position: absolute;
+  font-size: 14px;
+  line-height: 0;
+}
+
+/* Main Content Area (Sidebar + Data View) */
+.main-content-area {
+  display: flex;
+  flex: 1; /* Takes up the remaining vertical space */
+  overflow: hidden; /* Important for scroll management if content overflows */
+}
+
+/* Left Sidebar */
+.sidebar {
+  width: var(--sidebar-width);
+  border-right: 2px solid var(--border-color);
+  padding: 0.75rem;
+}
+
+/* Right Data View */
+.data-view {
+  flex-grow: 1; /* Takes up the remaining horizontal space */
+  padding: 0.75rem;
+  overflow-y: auto; /* Allows scrolling if data entries overflow */
+}
+
+/* List Header (Checkbox, Name, Three Dots) */
+.list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
+  padding: 5px 0;
+  margin-bottom: 0.75rem;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+}
+
+.list-header input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--border-color);
+  margin-right: 5px;
+}
+
+/* Three dots icon placeholder */
+.list-header .dots-icon {
+  /* Using a standard width/height for the icon area */
+  width: 1.25rem;
+  height: 1.25rem;
+  border: none; /* No border for the dots icon area itself */
+  position: relative;
+  /* Placeholder for three dots using pseudo-elements or just relying on the icon library */
+}
+/* Visual placeholder for the three dots */
+.list-header .dots-icon::before {
+  content: "...";
+  font-size: 1.25rem;
+  line-height: 0.75rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Empty Data Entry Boxes */
+.data-entry-box {
+  width: 100%;
+  height: 40px;
+  border: 2px solid var(--border-color);
+  margin-bottom: 0.75rem;
+  background-color: #f7f7f7; /* Slightly different background to show the box */
+}
+
+/* Optional: Make the checkbox and label look more aligned with the sketch's style */
+.list-header label {
+  cursor: pointer;
+}
+
+.modal {
+  position: fixed;
+  /* display: none; */
+  border: solid beige 3px;
+}
