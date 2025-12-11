@@ -1,0 +1,23 @@
+{
+  "name": "pmanager",
+  "version": "1.0.0",
+  "description": "password manager with sqlite",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/singh-kanishk/pManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/singh-kanishk/pManager/issues"
+  },
+  "homepage": "https://github.com/singh-kanishk/pManager#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}

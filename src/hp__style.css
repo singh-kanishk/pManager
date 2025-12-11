@@ -3,6 +3,13 @@
   --background-color: #fff;
   --sidebar-width: 200px; /* Adjust as needed */
   --control-size: 1.25rem;
+  --primary-color: #007bff; /* A standard blue for buttons/accents */
+  --primary-hover-color: #0056b3;
+  --cancel-color: #6c757d;
+  --cancel-hover-color: #5a6268;
+  --input-focus-shadow: rgba(0, 123, 255, 0.25);
+  --padding-unit: 15px;
+  --border-radius: 5px;
 }
 
 /* Basic Reset */
@@ -16,8 +23,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0.75rem 0px;
-  min-height: calc(100vh - 1.25rem);
+  margin: 0;
+  min-height: 100vh;
   background-color: #f0f0f0; /* Light background for the overall page */
   font-family: sans-serif;
 }
@@ -25,12 +32,13 @@ body {
 /* Main Window Container */
 .vault-window {
   width: 800px; /* Example width */
-  height: 100vh; /* Example height */
+  height: calc(100vh - 20px); /* Example height */
   border: 2px solid var(--border-color);
   background-color: var(--background-color);
   display: flex;
   flex-direction: column;
   box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 10px 0;
 }
 
 /* Window Header (Title and Controls) */
@@ -48,7 +56,9 @@ body {
 
 .window-controls {
   display: flex;
+  justify-content: center;
   gap: 8px;
+  
 }
 
 .icon-placeholder {
@@ -59,6 +69,9 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: solid black 2px;
+  border-radius: 5px;
+  height: 25px;
   /* Specific styling for window controls to match the sketch */
   /* Resizing/Maximize icon is often square or rectangle */
   /* The first two controls appear square/rectangle in the sketch */
@@ -66,17 +79,18 @@ body {
 
 /* Override for the first two control placeholders to make them box-like */
 .window-controls .new-button {
-  width: 25px;
-  height: 18px;
+  display: flex;
+  justify-content: center;
+  width: 60px;
+  
   /* Placeholder for the resize/maximize box with a cross */
   position: relative;
+  
 }
-.window-controls .new-button::before {
-  content: "+";
-  position: absolute;
-  font-size: 14px;
-  line-height: 0;
+.window-controls .grid-button,.profile-button{
+  width: 30px;
 }
+
 
 /* Main Content Area (Sidebar + Data View) */
 .main-content-area {
@@ -145,8 +159,12 @@ body {
 
 /* Empty Data Entry Boxes */
 .data-entry-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 40px;
+  padding: 0 5px;
   border: 2px solid var(--border-color);
   margin-bottom: 0.75rem;
   background-color: #f7f7f7; /* Slightly different background to show the box */
@@ -157,8 +175,156 @@ body {
   cursor: pointer;
 }
 
+/* --- Modal Container --- */
 .modal {
-  position: fixed;
-  /* display: none; */
-  border: solid beige 3px;
+  /* Position and display */
+  display: none; /* Typically set to 'none' and shown with JS, but 'block' for styling demo */
+  position: fixed; /* Fixed position relative to the viewport */
+  z-index: 1000; /* Ensure it is on top of other content */
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+}
+
+/* --- Modal Content Box --- */
+/* Update this section */
+.form-content {
+  background-color: var(--background-color);
+  
+  /* CHANGED: Removed '10% auto' and replaced with just 'auto' or simplified margin */
+  margin:10px auto; 
+  
+  padding: var(--padding-unit) * 2;
+  border: 1px solid var(--border-color);
+  width: 90%; 
+  max-width: 600px; 
+  border-radius: var(--border-radius);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  /* OPTIONAL: Ensures the modal doesn't touch the very top/bottom on small screens */
+  max-height: 90vh; 
+  overflow-y: auto; 
+}
+
+/* --- Form and Fieldset Styling --- */
+.newAddition {
+  display: flex;
+  flex-direction: column;
+  gap: var(--padding-unit);
+  padding: 10px;
+}
+
+fieldset {
+  border: 1px solid var(--border-color);
+  padding: var(--padding-unit);
+  margin: 0; /* Remove default margin */
+  border-radius: var(--border-radius);
+}
+
+legend {
+  padding: 0 10px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+/* --- Individual Form Entries --- */
+.newAddition-entry {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.newAddition-entry label {
+  margin-bottom: 5px;
+  font-weight: 600;
+  display: block; /* Ensure label takes full width */
+}
+
+.newAddition-entry input[type="text"],
+.newAddition-entry input[type="password"],
+.newAddition-entry select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  box-sizing: border-box; /* Crucial for padding/width calculation */
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.newAddition-entry textarea { /* ADDED THIS */
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: var(--border-radius);
+  box-sizing: border-box; 
+  transition: border-color 0.2s, box-shadow 0.2s;
+  resize: vertical; /* Good for textareas */
+}
+.newAddition-entry input:focus,
+.newAddition-entry select:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--input-focus-shadow);
+}
+.newAddition-entry textarea:focus { /* ADDED THIS */
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 0 3px var(--input-focus-shadow);
+}
+/* --- Form Actions/Buttons --- */
+.form-actions {
+  display: flex;
+  justify-content: flex-end; /* Align buttons to the right */
+  gap: var(--padding-unit);
+  margin-top: 20px;
+}
+
+.form-actions button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s, opacity 0.2s;
+}
+
+/* Save Button (Primary) */
+#newAddition_save {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+#newAddition_save:hover:not(:disabled) {
+  background-color: var(--primary-hover-color);
+}
+
+/* Save Button (Disabled State) */
+#newAddition_save:disabled {
+  background-color: #c0c0c0;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+/* Cancel Button (Secondary) */
+.modal-close {
+  background-color: var(--cancel-color);
+  color: var(--background-color);
+}
+
+.modal-close:hover {
+  background-color: var(--cancel-hover-color);
+}
+
+
+
+
+/* show property */
+.modal.show {
+  display: flex; /* This is required for the perfect centering */
+  justify-content: center;
+  align-items: center;
 }

@@ -1,52 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vault UI Layout</title>
-    <link rel="stylesheet" href="hp__style.css">
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css'>
+    <link rel="stylesheet" href="hp__style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/3.0.0/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
   </head>
-<body>
+  <body>
     <div class="vault-window">
-        <header class="window-header">
-            <span class="window-title">Vault</span>
-            <div class="window-controls">
-                <div class="icon-placeholder new-button"></div>
-                <div class="icon-placeholder grid-button"><i class="fi fi-rr-apps"></i></div>
-                <div class="icon-placeholder profile-button"><i class="fi fi-rr-user"></i></div>
+      <header class="window-header">
+        <span class="window-title">Vault</span>
+        <div class="window-controls">
+          <div class="icon-placeholder new-button">New <i class="fi fi-rr-plus-small"></i></div>
+          <div class="icon-placeholder grid-button">
+            <i class="fi fi-rr-apps"></i>
+          </div>
+          <div class="icon-placeholder profile-button">
+            <i class="fi fi-rr-user"></i>
+          </div>
+        </div>
+      </header>
+
+      <div class="main-content-area">
+        <aside class="sidebar"></aside>
+
+        <main class="data-view">
+          <div class="list-header">
+            <div class="header-controls">
+              <input type="checkbox" id="select-all" />
+              <label for="select-all">Name</label>
             </div>
-        </header>
+            <div class="icon-placeholder dots-icon"></div>
+          </div>
 
-        <div class="main-content-area">
-            <aside class="sidebar">
-                </aside>
-
-            <main class="data-view">
-                <div class="list-header">
-                    <div class="header-controls">
-                        <input type="checkbox" id="select-all">
-                        <label for="select-all">Name</label>
-                    </div>
-                    <div class="icon-placeholder dots-icon"></div>
+          <div class="data-entry-container">
+            <div class="data-entry-box">
+                <div>
+                <input type="checkbox">
+                <span class="data-entry-box_item-name">Kanishk</span>
                 </div>
-
-                <div class="data-entry-container">
-                    <div class="data-entry-box"></div>
-                   
-                </div>
-
-                </main>
-        </div>
-    <div class="modal modal-newAddition">
+                <div class="data-entry-box_options"> <i class="fi fi-rr-menu-dots-vertical"></i></div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div class="modal modal-newAddition">
         <div class="form-content">
-            <form>
-                <label for=""></label>
-                <input type="text" 
-            </form>
+          <form class="newAddition">
+            <fieldset>
+              <legend>Item Details:</legend>
+              <div class="newAddition-entry">
+                <label for="item-name">Item Name: </label>
+                <input
+                  type="text"
+                  id="newAddition_item-name"
+                  name="item-name"
+                />
+              </div>
+              <div class="newAddition-entry">
+                <label for="folder-name">Folder</label>
+                <select id="folder-name" name="folder-name">
+                  <option value="No Folder">No Folder</option>
+                </select>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>login credentials:</legend>
+              <div class="newAddition-entry">
+                <label for="url">URL</label>
+                <input type="text" id="newAddition_url" name="url" />
+              </div>
+              <div class="newAddition-entry">
+                <label for="username">Username</label>
+                <input type="text" id="newAddition_username" name="username" />
+              </div>
+              <div class="newAddition-entry">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="newAddition_password"
+                  name="password"
+                />
+              </div>
+            </fieldset>
+            <fieldset>
+  <legend>Note:</legend>
+  <div class="newAddition-entry">
+    <textarea 
+      id="newAddition_note" 
+      name="note" 
+      rows="4" 
+      cols="50"
+    >Enter Additional Note</textarea>
+  </div>
+</fieldset>
+            <div class="form-actions">
+              <button type="submit" id="newAddition_save" name="save" disabled>
+                💾 Save Item
+              </button>
+              <button type="button" class="modal-close">Cancel</button>
+            </div>
+          </form>
         </div>
-    </div>
+      </div>
     </div>
     <script src="hp__script.js"></script>
-</body>
+  </body>
 </html>
