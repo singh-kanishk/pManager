@@ -1,12 +1,17 @@
+// const modal = document.querySelector(".modal.modal-newAddition");
 const newAdditionButton = document.querySelector(".new-button");
 newAdditionButton.addEventListener("click", () => {
   document.querySelector(".modal.modal-newAddition").classList.add("show");
 });
+
+
 const cancelOnAdditionForm = document.querySelector(".modal-close");
 cancelOnAdditionForm.addEventListener("click", () => {
   document.querySelector(".modal.modal-newAddition").classList.remove("show");
 });
-const submitAdditionForm = document.querySelector('.newAddition');
+
+
+const submitAdditionForm = document.querySelector(".newAddition");
 submitAdditionForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(submitAdditionForm);
@@ -19,6 +24,31 @@ submitAdditionForm.addEventListener("submit", async (e) => {
       },
       body: JSON.stringify(data),
     });
+    if (response.ok) {
+      const responseData = await response.json();
+      const newDiv = document.createElement("div");
+     
+      newDiv.className = "data-entry-box";
+      newDiv.setAttribute("id", responseData.id);
+      newDiv.innerHTML = `
+        <div>
+           <input type="checkbox">
+           <span class="data-entry-box_itemName">${responseData.itemName}</span>
+        </div>
+        <div class="data-entry-box_options"> 
+           <i class="fi fi-rr-menu-dots-vertical"></i>
+        </div>
+      `;
+      const divContainer = document.querySelector(".data-entry-container");
+      divContainer.append(newDiv);
+      
+      submitAdditionForm.reset();
+      document.querySelector(".modal.modal-newAddition").classList.remove("show");
+
+    }
+    else{
+      throw new Error('Error in response')
+    }
   } catch (e) {
     console.log(`Error is ${e}`);
   }

@@ -9,9 +9,9 @@ db.exec(`
         folderName TEXT,
         url TEXT,
         userName TEXT NOT NULL,
-        password TEXT NOT NULL
+        password TEXT NOT NULL,
+        note TEXT
     )    
     `)
-
 
 export default db
