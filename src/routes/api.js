@@ -21,14 +21,30 @@ router.post("/data", (req, res) => {
     res.status(201).json({
       message: "Success",
       id: info.lastInsertRowid,
-      itemName:result.itemName
+      itemName: result.itemName,
     });
-  } 
-  catch (e) {
+  } catch (e) {
     console.log(e);
     res.status(401).json({
       error: "Failed To Save",
     });
+  }
+});
+router.get("/data", (req, res) => {
+  try {
+    
+    const pageNumber = parseInt(req.query.page)||1;
+    const limit = 20;
+    let offset = (pageNumber - 1) * limit;
+    const getData = db.prepare(`SELECT itemName,itemId as id FROM data LIMIT ? OFFSET ?`);
+    const receivedData = getData.all(limit, offset);
+
+    res.json(receivedData);
+  } catch(e) {
+console.error(e)
+res.status(404).json({
+  message:`error while fetching data`
+})
   }
 });
 
