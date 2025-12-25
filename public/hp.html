@@ -15,7 +15,9 @@
       <header class="window-header">
         <span class="window-title">Vault</span>
         <div class="window-controls">
-          <div class="icon-placeholder new-button">New <i class="fi fi-rr-plus-small"></i></div>
+          <div class="icon-placeholder new-button">
+            New <i class="fi fi-rr-plus-small"></i>
+          </div>
           <div class="icon-placeholder grid-button">
             <i class="fi fi-rr-apps"></i>
           </div>
@@ -39,32 +41,28 @@
 
           <div class="data-entry-container">
             <div class="data-entry-box">
-                <div>
-                <input type="checkbox">
+              <div>
+                <input type="checkbox" />
                 <span class="data-entry-box_itemName">Kanishk</span>
-                </div>
-                <div class="data-entry-box_options"> <i class="fi fi-rr-menu-dots-vertical"></i></div>
+              </div>
+              <div class="data-entry-box_options">
+                <i class="fi fi-rr-menu-dots-vertical"></i>
+              </div>
             </div>
           </div>
-          <div id="loading-sentinel">
-    Loading more...
-</div>
+          <div id="loading-sentinel">Loading more...</div>
         </main>
       </div>
       <div class="modal modal-newAddition">
         <div class="form-content">
-          <form class="newAddition" target="_parent">
+          <form class="modal-form" target="_parent">
             <fieldset>
               <legend>Item Details:</legend>
-              <div class="newAddition-entry">
+              <div class="form-group">
                 <label for="itemName">Item Name: </label>
-                <input
-                  type="text"
-                  id="newAddition_itemName"
-                  name="itemName"
-                />
+                <input type="text" id="modal-form_itemName" name="itemName" />
               </div>
-              <div class="newAddition-entry">
+              <div class="form-group">
                 <label for="folderName">Folder</label>
                 <select id="folderName" name="folderName">
                   <option value="No Folder">No Folder</option>
@@ -73,36 +71,33 @@
             </fieldset>
             <fieldset>
               <legend>login credentials:</legend>
-              <div class="newAddition-entry">
+              <div class="form-group">
                 <label for="url">URL</label>
-                <input type="text" id="newAddition_url" name="url" />
+                <input type="text" id="modal-form_url" name="url" />
               </div>
-              <div class="newAddition-entry">
+              <div class="form-group">
                 <label for="userName">Username</label>
-                <input type="text" id="newAddition_username" name="userName" />
+                <input type="text" id="modal-form_username" name="userName" />
               </div>
-              <div class="newAddition-entry">
+              <div class="form-group">
                 <label for="password">Password</label>
                 <input
                   type="password"
-                  id="newAddition_password"
+                  id="modal-form_password"
                   name="password"
                 />
               </div>
             </fieldset>
             <fieldset>
-  <legend>Note:</legend>
-  <div class="newAddition-entry">
-    <textarea 
-      id="newAddition_note" 
-      name="note" 
-      rows="4" 
-      cols="50"
-    >Enter Additional Note</textarea>
-  </div>
-</fieldset>
+              <legend>Note:</legend>
+              <div class="form-group">
+                <textarea id="modal-form_note" name="note" rows="4" cols="50">
+Enter Additional Note</textarea
+                >
+              </div>
+            </fieldset>
             <div class="form-actions">
-              <button type="submit" id="newAddition_save" name="save">
+              <button type="submit" class="btn-save" id="modal-form_save" name="save">
                 💾 Save Item
               </button>
               <button type="button" class="modal-close">Cancel</button>

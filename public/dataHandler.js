@@ -1,32 +1,32 @@
 //SENtinel IDEa TAKen from AI
 
-
 let currentPage = 1;
 let isFetching = false;
 let hasMore = true;
-const sentinel = document.getElementById('loading-sentinel');
+const sentinel = document.getElementById("loading-sentinel");
+const divContainer = document.querySelector(".data-entry-container");
 const getDataForHomePage = async () => {
   if (isFetching || !hasMore) return;
   isFetching = true;
-  try{
-  const getData = await fetch(
-    `http://localhost:3998/api/data?page=${currentPage}`
-  );
+  try {
+    const getData = await fetch(
+      `http://localhost:3998/api/data?page=${currentPage}`
+    );
 
-  if (getData.ok) {
-    const receivedData = await getData.json();
-    if(receivedData.length===0){
-        hasMore=false;
+    if (getData.ok) {
+      const receivedData = await getData.json();
+      if (receivedData.length === 0) {
+        hasMore = false;
         sentinel.innerText = "No more data available";
         return;
-    }
+      }
 
-    receivedData.forEach((item) => {
-      const newDiv = document.createElement("div");
+      receivedData.forEach((item) => {
+        const newDiv = document.createElement("div");
 
-      newDiv.className = "data-entry-box";
-      newDiv.setAttribute("id", item.id);
-      newDiv.innerHTML = `
+        newDiv.className = "data-entry-box";
+        newDiv.setAttribute("id", item.id);
+        newDiv.innerHTML = `
         <div>
            <input type="checkbox">
            <span class="data-entry-box_itemName">${item.itemName}</span>
@@ -35,41 +35,50 @@ const getDataForHomePage = async () => {
            <i class="fi fi-rr-menu-dots-vertical"></i>
         </div>
       `;
-      const divContainer = document.querySelector(".data-entry-container");
-      divContainer.append(newDiv);
+
+        divContainer.append(newDiv);
+      });
+      currentPage++;
     }
-    
-);
-currentPage++;
+  } catch (error) {
+    console.error("Error loading posts:", error);
+    sentinel.innerText = "Error loading data!";
+  } finally {
+    // Unlock the function so it can be called again
+    isFetching = false;
   }
-  
-  }
-  catch(error){console.error("Error loading posts:", error);
-        sentinel.innerText = "Error loading data!";
-    } finally {
-        // Unlock the function so it can be called again
-        isFetching = false;
-    }
 };
 // --- INTERSECTION OBSERVER SETUP ---
 // The IntersectionObserver watches elements and tells you when they enter the viewport.
 
 const observerOptions = {
-    root: null,       // null means use the browser viewport as the viewing area
-    rootMargin: '0px',
-    threshold: 0.1    // Trigger callback when 10% of the sentinel is visible
+  root: null, // null means use the browser viewport as the viewing area
+  rootMargin: "0px",
+  threshold: 0.1, // Trigger callback when 10% of the sentinel is visible
 };
 
 const observer = new IntersectionObserver((entries) => {
-    // 'entries' is an array of watched elements (we only have one)
-    const entry = entries[0];
+  // 'entries' is an array of watched elements (we only have one)
+  const entry = entries[0];
 
-    // If the sentinel (loading text) is visible on screen...
-    if (entry.isIntersecting) {
-        // ...load the next batch of posts!
-        getDataForHomePage();
-    }
+  // If the sentinel (loading text) is visible on screen...
+  if (entry.isIntersecting) {
+    // ...load the next batch of posts!
+    getDataForHomePage();
+  }
 }, observerOptions);
 
 // Start watching the sentinel element
 observer.observe(sentinel);
+
+//opening each data entry on website
+const getDataForEachItem = async (id) => {
+  const item=document.getElementById(`${id}`)
+  try {
+    const getItem = await fetch(`http://localhost:3998/api/data/${id}`);
+    if (!getItem.ok) {
+      throw new Error("problem while fetching data");
+    }
+    
+  } catch (e) {}
+};

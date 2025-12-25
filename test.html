@@ -1,0 +1,52 @@
+<div class="modal modal-viewData">
+        <div class="form-content">
+          <form class="newAddition" target="_parent">
+            <fieldset>
+              <legend>Item Details:</legend>
+              <div class="newAddition-entry">
+                <label for="itemName">Item Name: </label>
+                <input type="text" id="newAddition_itemName" name="itemName" />
+              </div>
+              <div class="newAddition-entry">
+                <label for="folderName">Folder</label>
+                <select id="folderName" name="folderName">
+                  <option value="No Folder">No Folder</option>
+                </select>
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>login credentials:</legend>
+              <div class="newAddition-entry">
+                <label for="url">URL</label>
+                <input type="text" id="newAddition_url" name="url" />
+              </div>
+              <div class="newAddition-entry">
+                <label for="userName">Username</label>
+                <input type="text" id="newAddition_username" name="userName" />
+              </div>
+              <div class="newAddition-entry">
+                <label for="password">Password</label>
+                <input
+                  type="password"
+                  id="newAddition_password"
+                  name="password"
+                />
+              </div>
+            </fieldset>
+            <fieldset>
+              <legend>Note:</legend>
+              <div class="newAddition-entry">
+                <textarea id="newAddition_note" name="note" rows="4" cols="50">
+Enter Additional Note</textarea
+                >
+              </div>
+            </fieldset>
+            <div class="form-actions">
+              <button type="submit" id="newAddition_save" name="save">
+                💾 Save Item
+              </button>
+              <button type="button" class="modal-close">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>

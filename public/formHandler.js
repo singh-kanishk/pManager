@@ -1,17 +1,15 @@
 // const modal = document.querySelector(".modal.modal-newAddition");
-const newAdditionButton = document.querySelector(".new-button");
-newAdditionButton.addEventListener("click", () => {
+const modalformButton = document.querySelector(".new-button");
+modalformButton.addEventListener("click", () => {
   document.querySelector(".modal.modal-newAddition").classList.add("show");
 });
-
 
 const cancelOnAdditionForm = document.querySelector(".modal-close");
 cancelOnAdditionForm.addEventListener("click", () => {
   document.querySelector(".modal.modal-newAddition").classList.remove("show");
 });
 
-
-const submitAdditionForm = document.querySelector(".newAddition");
+const submitAdditionForm = document.querySelector(".modal-form");
 submitAdditionForm.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(submitAdditionForm);
@@ -27,9 +25,12 @@ submitAdditionForm.addEventListener("submit", async (e) => {
     if (response.ok) {
       const responseData = await response.json();
       const newDiv = document.createElement("div");
-     
+      const dataId = responseData.id;
       newDiv.className = "data-entry-box";
-      newDiv.setAttribute("id", responseData.id);
+      newDiv.setAttribute("id", dataId);
+      newDiv.addEventListener("click", () => {
+        getDataForEachItem(dataId);
+      });
       newDiv.innerHTML = `
         <div>
            <input type="checkbox">
@@ -41,13 +42,13 @@ submitAdditionForm.addEventListener("submit", async (e) => {
       `;
       const divContainer = document.querySelector(".data-entry-container");
       divContainer.append(newDiv);
-      
-      submitAdditionForm.reset();
-      document.querySelector(".modal.modal-newAddition").classList.remove("show");
 
-    }
-    else{
-      throw new Error('Error in response')
+      submitAdditionForm.reset();
+      document
+        .querySelector(".modal.modal-newAddition")
+        .classList.remove("show");
+    } else {
+      throw new Error("Error in response");
     }
   } catch (e) {
     console.log(`Error is ${e}`);

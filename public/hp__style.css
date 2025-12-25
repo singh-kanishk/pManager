@@ -212,7 +212,7 @@ body {
 }
 
 /* --- Form and Fieldset Styling --- */
-.newAddition {
+.modal-form {
   display: flex;
   flex-direction: column;
   gap: var(--padding-unit);
@@ -233,21 +233,21 @@ legend {
 }
 
 /* --- Individual Form Entries --- */
-.newAddition-entry {
+.form-group {
   display: flex;
   flex-direction: column;
   margin-bottom: 10px;
 }
 
-.newAddition-entry label {
+.form-group label {
   margin-bottom: 5px;
   font-weight: 600;
   display: block; /* Ensure label takes full width */
 }
 
-.newAddition-entry input[type="text"],
-.newAddition-entry input[type="password"],
-.newAddition-entry select {
+.form-group input[type="text"],
+.form-group input[type="password"],
+.form-group select {
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -255,7 +255,7 @@ legend {
   box-sizing: border-box; /* Crucial for padding/width calculation */
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-.newAddition-entry textarea { /* ADDED THIS */
+.form-group textarea { /* ADDED THIS */
   width: 100%;
   padding: 10px;
   border: 1px solid #ccc;
@@ -264,13 +264,13 @@ legend {
   transition: border-color 0.2s, box-shadow 0.2s;
   resize: vertical; /* Good for textareas */
 }
-.newAddition-entry input:focus,
-.newAddition-entry select:focus {
+.form-group input:focus,
+.form-group select:focus {
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 3px var(--input-focus-shadow);
 }
-.newAddition-entry textarea:focus { /* ADDED THIS */
+.form-group textarea:focus { /* ADDED THIS */
   border-color: var(--primary-color);
   outline: none;
   box-shadow: 0 0 0 3px var(--input-focus-shadow);
@@ -293,17 +293,17 @@ legend {
 }
 
 /* Save Button (Primary) */
-#newAddition_save {
+.btn-save {
   background-color: var(--primary-color);
   color: var(--background-color);
 }
 
-#newAddition_save:hover:not(:disabled) {
+.btn-save:hover:not(:disabled) {
   background-color: var(--primary-hover-color);
 }
 
 /* Save Button (Disabled State) */
-#newAddition_save:disabled {
+.btn-save:disabled {
   background-color: #c0c0c0;
   color: #808080;
   cursor: not-allowed;
